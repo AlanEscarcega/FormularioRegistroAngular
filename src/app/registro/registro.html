@@ -4,22 +4,55 @@
     <form #registroForm="ngForm" (ngSubmit)="registrar()">
 
         <label for="nombre">Nombre completo</label>
-        <input id="nombre" type="text" name="nombre" [(ngModel)]="usuario.nombre" required>
+        <input id="nombre" type="text" name="nombre" [(ngModel)]="usuario.nombre" #nombre="ngModel" required
+            minlength="3">
+        @if (nombre.invalid && (nombre.touched || nombre.dirty)) {
+        <small class="error">
+            @if (nombre.errors?.['required']) { El nombre es obligatorio. }
+            @else { El nombre debe tener al menos 3 caracteres. }
+        </small>
+        }
 
         <label for="correo">Correo electrónico</label>
-        <input id="correo" type="email" name="correo" [(ngModel)]="usuario.correo" required>
+        <input id="correo" type="email" name="correo" [(ngModel)]="usuario.correo" #correo="ngModel" required email>
+        @if (correo.invalid && (correo.touched || correo.dirty)) {
+        <small class="error">
+            @if (correo.errors?.['required']) { El correo es obligatorio. }
+            @else { Ingresa un correo válido. }
+        </small>
+        }
 
         <label for="telefono">Teléfono</label>
-        <input id="telefono" type="tel" name="telefono" [(ngModel)]="usuario.telefono" required>
+        <input id="telefono" type="tel" name="telefono" [(ngModel)]="usuario.telefono" #telefono="ngModel" required>
+        @if (telefono.invalid && (telefono.touched || telefono.dirty)) {
+        <small class="error">El teléfono es obligatorio.</small>
+        }
 
         <label for="edad">Edad</label>
-        <input id="edad" type="number" name="edad" [(ngModel)]="usuario.edad" required>
+        <input id="edad" type="number" name="edad" [(ngModel)]="usuario.edad" #edad="ngModel" required min="18">
+        @if (edad.invalid && (edad.touched || edad.dirty)) {
+        <small class="error">
+            @if (edad.errors?.['required']) { La edad es obligatoria. }
+            @else { La edad mínima es de 18 años. }
+        </small>
+        }
 
         <label for="contrasena">Contraseña</label>
-        <input id="contrasena" type="password" name="contrasena" [(ngModel)]="usuario.contrasena" required>
+        <input id="contrasena" type="password" name="contrasena" [(ngModel)]="usuario.contrasena" #contrasena="ngModel"
+            required minlength="6">
+        @if (contrasena.invalid && (contrasena.touched || contrasena.dirty)) {
+        <small class="error">
+            @if (contrasena.errors?.['required']) { La contraseña es obligatoria. }
+            @else { La contraseña debe tener al menos 6 caracteres. }
+        </small>
+        }
 
         <label for="confirmacion">Confirmación de contraseña</label>
-        <input id="confirmacion" type="password" name="confirmacion" [(ngModel)]="usuario.confirmacion" required>
+        <input id="confirmacion" type="password" name="confirmacion" [(ngModel)]="usuario.confirmacion"
+            #confirmacion="ngModel" required>
+        @if (confirmacion.invalid && (confirmacion.touched || confirmacion.dirty)) {
+        <small class="error">Confirma tu contraseña.</small>
+        }
 
         <button type="submit" [disabled]="registroForm.invalid">
             Registrar

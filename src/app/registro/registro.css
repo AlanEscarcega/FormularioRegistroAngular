@@ -83,3 +83,22 @@ button:disabled {
     margin: 11px 0;
     font-size: 15px;
 }
+
+
+/* Mensaje de error bajo el campo */
+.error {
+    display: block;
+    margin-top: 6px;
+    color: #c0605a;
+    font-size: 13px;
+}
+
+input.ng-invalid.ng-touched {
+    border-color: #c0605a;
+    background: #fbf1f0;
+}
+
+input.ng-valid.ng-touched {
+    border-color: #5fa37a;
+    background: #f1faf4;
+}

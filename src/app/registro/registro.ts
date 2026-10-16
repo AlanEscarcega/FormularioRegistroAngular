@@ -12,7 +12,7 @@ export class Registro {
     nombre: '',
     correo: '',
     telefono: '',
-    edad: '',
+    edad: null as number | null,
     contrasena: '',
     confirmacion: ''
   };
